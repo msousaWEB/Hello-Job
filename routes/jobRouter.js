@@ -3,14 +3,14 @@ const router = express.Router();
 const Job = require('../models/Job');
 
 router.post('/add', (require, response) => {
-    let {title, salary, compony, description, email, new_job} = require.body;
+    let {title, salary, company, description, email, new_job} = require.body;
 
     //insert
     Job.create({
         title,
         description,
         salary,
-        compony,
+        company,
         email,
         new_job
     })
