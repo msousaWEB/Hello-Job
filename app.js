@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const db = require('./db/connection');
 const bodyParser = require('body-parser');
+const Job = require('./models/Job');
 
 const PORT = 3000;
 
@@ -34,7 +35,14 @@ db.authenticate()
 
 //rotas
 app.get('/' , (require, response) => {
-    response.render('index');
+    Job.findAll({order: [
+        ['createdAt', 'DESC']
+    ]})
+        .then(jobs => {
+            response.render('index', {
+                jobs
+            })
+        });
 });
 
 //jobs routes
