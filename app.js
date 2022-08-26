@@ -16,8 +16,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // handle bars
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+
+//static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 //conexao com banco
 db.authenticate()
@@ -31,7 +34,7 @@ db.authenticate()
 
 //rotas
 app.get('/' , (require, response) => {
-    response.send("HelloJob");
+    response.render('index');
 });
 
 //jobs routes
